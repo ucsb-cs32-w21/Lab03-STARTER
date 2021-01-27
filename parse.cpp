@@ -108,6 +108,7 @@ std::vector<shared_ptr<demogData>> read_csv(std::string filename, typeFlag fileT
     return theData;
 }
 
+//TODO complete
 shared_ptr<hospitalData> readCSVLineHospital(std::string theLine) {
     std::stringstream ss(theLine);
     
@@ -116,13 +117,10 @@ shared_ptr<hospitalData> readCSVLineHospital(std::string theLine) {
     string state = getField(ss);
     string type  = getField(ss);
     string temp = getField(ss);
-    //std::cout << "temp: " << temp << std::endl;
-    //rating can be encoded -1 - fragile
-    int overallRating = std::max(0, stoi(temp));
-    rating mortal(getField(ss));
-    rating readmit(getField(ss));
+    //TODO add in code to read in rating information when you
+    //defined the type
 
-    return make_shared<hospitalData>(name, state, type, overallRating, mortal, readmit);
+    return make_shared<hospitalData>(name, state, type);
 }
 
 // Reads a CSV file (first half from example: https://www.gormanalysis.com/blog/reading-and-writing-csv-files-with-cpp/)
