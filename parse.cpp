@@ -42,8 +42,7 @@ void consumeColumnNames(std::ifstream &myFile) {
     }
 }
 
-/* Read one line from a CSV file for county demographic data specifically
-   TODO: check that the constructor matches yours */
+/* Read one line from a CSV file for county demographic data specifically */
 shared_ptr<demogData> readCSVLineDemog(std::string theLine) {
     std::stringstream ss(theLine);
     
@@ -55,13 +54,25 @@ shared_ptr<demogData> readCSVLineDemog(std::string theLine) {
     double bachelorDegreeUp = stod(getField(ss));
     double highSchoolUp = stod(getField(ss));
 
+    //now skip over some data
+    for (int i=0; i < 20; i++)
+        getField(ss);
+
+    double belowPoverty = stod(getField(ss));
+
+    //now skip over some data 
+    for (int i=0; i < 10; i++)
+        getField(ss);
+
+    int totalPop2014 = stoi(getField(ss));
+
     return make_shared<demogData>(name, state, popOver65, popUnder18,
-            popUnder5, bachelorDegreeUp, highSchoolUp);
+            popUnder5, bachelorDegreeUp, highSchoolUp, belowPoverty, totalPop2014);
 }
 
 
 //read from a CSV file (for a given data type) return a vector of the data
-// DO NOT modify for lab01
+// DO NOT modify 
 std::vector<shared_ptr<demogData>> read_csv(std::string filename, typeFlag fileType) {
     //the actual data
     std::vector<shared_ptr<demogData>> theData;
@@ -97,9 +108,6 @@ std::vector<shared_ptr<demogData>> read_csv(std::string filename, typeFlag fileT
     return theData;
 }
 
-
-/* Read one line from a CSV file for county hosptial data specifically
-   TODO: add necessary data per lab03 */
 shared_ptr<hospitalData> readCSVLineHospital(std::string theLine) {
     std::stringstream ss(theLine);
     
@@ -108,14 +116,16 @@ shared_ptr<hospitalData> readCSVLineHospital(std::string theLine) {
     string state = getField(ss);
     string type  = getField(ss);
     string temp = getField(ss);
-    //be careful about how rating can be encoded 
+    //std::cout << "temp: " << temp << std::endl;
+    //rating can be encoded -1 - fragile
+    int overallRating = std::max(0, stoi(temp));
+    rating mortal(getField(ss));
+    rating readmit(getField(ss));
 
-    return make_shared<hospitalData>(name, state, type);
+    return make_shared<hospitalData>(name, state, type, overallRating, mortal, readmit);
 }
 
-
-//read from a CSV file (for a given data type) return a vector of the data
-// DO NOT modify for lab01
+// Reads a CSV file (first half from example: https://www.gormanalysis.com/blog/reading-and-writing-csv-files-with-cpp/)
 std::vector<shared_ptr<hospitalData>> read_csvHospital(std::string filename, typeFlag fileType) {
     //the actual data
     std::vector<shared_ptr<hospitalData>> theData;

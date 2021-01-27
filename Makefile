@@ -1,14 +1,15 @@
 #CXX=clang++
 CXX=g++
 
-CXXFLAGS= -O3 -std=c++14 
+CXXFLAGS= -Wall
 
-BINARIES=dataProj testStates
+BINARIES=dataProj testStates testSort
 
 all: ${BINARIES}
 
 tests: ${BINARIES}
 	./testStates
+	./testSort
 
 dataProj: rating.o dataAQ.o stateHosp.o stateDemog.o demogData.o parse.o main.o
 	${CXX} $^ -o $@
@@ -16,5 +17,9 @@ dataProj: rating.o dataAQ.o stateHosp.o stateDemog.o demogData.o parse.o main.o
 testStates: rating.o stateHosp.o testStates.o dataAQ.o stateDemog.o demogData.o parse.o  tddFuncs.o
 	${CXX} $^ -o $@
 
+testSort: rating.o stateHosp.o testSort1.o dataAQ.o stateDemog.o demogData.o parse.o  tddFuncs.o
+	${CXX} $^ -o $@
+
 clean:
 	/bin/rm -f ${BINARIES} *.o 
+
