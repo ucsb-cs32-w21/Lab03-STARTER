@@ -73,9 +73,9 @@ shared_ptr<demogData> readCSVLineDemog(std::string theLine) {
 
 //read from a CSV file (for a given data type) return a vector of the data
 // DO NOT modify 
-std::vector<shared_ptr<demogData>> read_csv(std::string filename, typeFlag fileType) {
+std::vector<shared_ptr<demogData> > read_csv(std::string filename, typeFlag fileType) {
     //the actual data
-    std::vector<shared_ptr<demogData>> theData;
+    std::vector<shared_ptr<demogData> > theData;
 
     // Create an input filestream
     std::ifstream myFile(filename);
@@ -108,25 +108,26 @@ std::vector<shared_ptr<demogData>> read_csv(std::string filename, typeFlag fileT
     return theData;
 }
 
-//TODO complete
+/* Read one line from a CSV file for county demographic data specifically */
 shared_ptr<hospitalData> readCSVLineHospital(std::string theLine) {
     std::stringstream ss(theLine);
     
     string name = getField(ss);
-    string ignore = getField(ss); //ignore city
+    string city = getField(ss); 
     string state = getField(ss);
     string type  = getField(ss);
     string temp = getField(ss);
-    //TODO add in code to read in rating information when you
-    //defined the type
 
+	//to do add code to read in ratings info
     return make_shared<hospitalData>(name, state, type);
 }
 
-// Reads a CSV file (first half from example: https://www.gormanalysis.com/blog/reading-and-writing-csv-files-with-cpp/)
-std::vector<shared_ptr<hospitalData>> read_csvHospital(std::string filename, typeFlag fileType) {
+//read from a CSV file (for a given data type) return a vector of the 
+//hospital data
+// DO NOT modify 
+std::vector<shared_ptr<hospitalData> > read_csvHospital(std::string filename, typeFlag fileType) {
     //the actual data
-    std::vector<shared_ptr<hospitalData>> theData;
+    std::vector<shared_ptr<hospitalData> > theData;
 
     // Create an input filestream
     std::ifstream myFile(filename);

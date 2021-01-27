@@ -14,10 +14,10 @@ using namespace std;
 */
 class hospitalData {
   public:
+	 //constructor for starting code - make complete by adding rating
     hospitalData(string inN, string inS, string inType) :
             name(inN), state(inS), type(inType) {
     }
-
     string getName() const { return name; }
     string getState() const { return state; }
     string getType() const { return type; }

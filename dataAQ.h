@@ -17,9 +17,9 @@ class dataAQ {
 
     /* necessary function to aggregate the data - this CAN and SHOULD vary per
    student - depends on how they map, etc. */
-    void createStateDemogData(std::vector<shared_ptr<demogData>> theData);
+    void createStateDemogData(std::vector<shared_ptr<demogData> > theData);
 
-    void createStateHospData(std::vector<shared_ptr<hospitalData>> theData);
+    void createStateHospData(std::vector<shared_ptr<hospitalData> > theData);
 
     //return the name of the state with the largest population under age 5
     string youngestPop();

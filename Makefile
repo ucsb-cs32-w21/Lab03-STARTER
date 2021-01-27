@@ -1,7 +1,7 @@
 #CXX=clang++
 CXX=g++
 
-CXXFLAGS= -Wall
+CXXFLAGS= -Wall 
 
 BINARIES=dataProj testStates testSort
 
