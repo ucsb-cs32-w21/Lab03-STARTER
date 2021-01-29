@@ -1,7 +1,8 @@
-#CXX=clang++
-CXX=g++
+CXX=clang++
+#CXX=g++
 
-CXXFLAGS= -Wall 
+#CXXFLAGS= -Wall  -std=c++14
+CXXFLAGS= -Wall  -std=c++14
 
 BINARIES=dataProj testStates testSort
 
@@ -11,13 +12,13 @@ tests: ${BINARIES}
 	./testStates
 	./testSort
 
-dataProj: rating.o dataAQ.o stateHosp.o stateDemog.o demogData.o parse.o main.o
+dataProj: hospitalData.o rating.o dataAQ.o stateHosp.o stateDemog.o demogData.o parse.o main.o
 	${CXX} $^ -o $@
 
-testStates: rating.o stateHosp.o testStates.o dataAQ.o stateDemog.o demogData.o parse.o  tddFuncs.o
+testStates: hospitalData.o rating.o stateHosp.o testStates.o dataAQ.o stateDemog.o demogData.o parse.o  tddFuncs.o
 	${CXX} $^ -o $@
 
-testSort: rating.o stateHosp.o testSort1.o dataAQ.o stateDemog.o demogData.o parse.o  tddFuncs.o
+testSort: hospitalData.o rating.o stateHosp.o testSort1.o dataAQ.o stateDemog.o demogData.o parse.o  tddFuncs.o
 	${CXX} $^ -o $@
 
 clean:

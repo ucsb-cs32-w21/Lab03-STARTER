@@ -17,9 +17,9 @@ class dataAQ {
 
     /* necessary function to aggregate the data - this CAN and SHOULD vary per
    student - depends on how they map, etc. */
-    void createStateDemogData(std::vector<shared_ptr<demogData> > theData);
+    void createStateDemogData(std::vector<shared_ptr<demogData> > theData) {/*fill in*/}
 
-    void createStateHospData(std::vector<shared_ptr<hospitalData> > theData);
+    void createStateHospData(std::vector<shared_ptr<hospitalData> > theData) {/*fill in*/}
 
     //return the name of the state with the largest population under age 5
     string youngestPop();
@@ -35,10 +35,10 @@ class dataAQ {
     string getMinTeenPop();
 
     //new queries associated with hospital data
-    string LowHospRating();
-    string HighHospRating();
-    string HighMortHospRating();
-    string HighReadmitHospRating();
+    string LowHospRating() {/*fill in*/}
+    string HighHospRating(){/*fill in*/}
+    string HighMortHospRating(){/*fill in*/}
+    string HighReadmitHospRating(){/*fill in*/}
 
     //For testing, ok to have data be public
     //implementation could vary

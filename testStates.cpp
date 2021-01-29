@@ -16,11 +16,19 @@ int main() {
 
     theAnswers.createStateHospData(theHospitalData);
 
+    string lowHosp = theAnswers.LowHospRating();
+    ASSERT_EQUALS("DC", lowHosp);
+
     string highHosp = theAnswers.HighHospRating();
-  	ASSERT_EQUALS("WI",highHosp);
+  	ASSERT_EQUALS("WI", highHosp);
+
+    string highMort = theAnswers.HighMortHospRating();
+    ASSERT_EQUALS("MA", highMort);
 
   	string highReadmit = theAnswers.HighReadmitHospRating();
   	ASSERT_EQUALS("ID", highReadmit);
+
+
 
   return 0;
 }

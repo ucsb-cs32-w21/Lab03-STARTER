@@ -1,6 +1,7 @@
 /* helper routines to read out csv data */
 #include "parse.h"
 #include <algorithm>
+#include <cmath>
 
 /* helper to strip out quotes from a string */
 string stripQuotes(std::string temp) {
@@ -48,17 +49,20 @@ shared_ptr<demogData> readCSVLineDemog(std::string theLine) {
     
     string name = getField(ss);
     string state = getField(ss);
-    double popOver65 = stod(getField(ss));
-    double popUnder18 = stod(getField(ss));
-    double popUnder5 = stod(getField(ss));
-    double bachelorDegreeUp = stod(getField(ss));
-    double highSchoolUp = stod(getField(ss));
+
+    //turn into mathematical percent
+    double popOver65 = stod(getField(ss))/100.0;
+    double popUnder18 = stod(getField(ss))/100.0;;
+    double popUnder5 = stod(getField(ss))/100.0;;
+    double bachelorDegreeUp = stod(getField(ss))/100.0;;
+    double highSchoolUp = stod(getField(ss))/100.0;;
 
     //now skip over some data
     for (int i=0; i < 20; i++)
         getField(ss);
 
-    double belowPoverty = stod(getField(ss));
+    //turn into mathematical percent
+    double belowPoverty = stod(getField(ss))/100;
 
     //now skip over some data 
     for (int i=0; i < 10; i++)
@@ -66,8 +70,14 @@ shared_ptr<demogData> readCSVLineDemog(std::string theLine) {
 
     int totalPop2014 = stoi(getField(ss));
 
-    return make_shared<demogData>(name, state, popOver65, popUnder18,
-            popUnder5, bachelorDegreeUp, highSchoolUp, belowPoverty, totalPop2014);
+    //store demographic data as counts
+    return make_shared<demogData>(name, state, round(popOver65*totalPop2014), 
+            round(popUnder18*totalPop2014),
+            round(popUnder5*totalPop2014), 
+            round(bachelorDegreeUp*totalPop2014), 
+            round(highSchoolUp*totalPop2014), 
+            round(belowPoverty*totalPop2014), 
+            totalPop2014);
 }
 
 
@@ -108,7 +118,7 @@ std::vector<shared_ptr<demogData> > read_csv(std::string filename, typeFlag file
     return theData;
 }
 
-/* Read one line from a CSV file for county demographic data specifically */
+/* Read one line from a CSV file for hospital data specifically */
 shared_ptr<hospitalData> readCSVLineHospital(std::string theLine) {
     std::stringstream ss(theLine);
     
@@ -117,8 +127,9 @@ shared_ptr<hospitalData> readCSVLineHospital(std::string theLine) {
     string state = getField(ss);
     string type  = getField(ss);
     string temp = getField(ss);
+ 
+    //TODO you need to read rating data
 
-	//to do add code to read in ratings info
     return make_shared<hospitalData>(name, state, type);
 }
 

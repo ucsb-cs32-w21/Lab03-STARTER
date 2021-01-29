@@ -24,6 +24,16 @@ int main() {
     std::vector<shared_ptr<hospitalData>> theHospitalData = read_csvHospital(
             "hospitals.csv", HOSPITAL);
 
+    /* For debugging print out what is read  - only AL for debug only*/
+    for (auto elem : theDemogData) {
+        if (elem->getName().compare("AL"))
+            cout << *elem << endl;
+    }
+    for (auto hosp : theHospitalData) {
+        if (hosp->getName().compare("AL"))
+            cout << *hosp << endl;
+    }
+
     //create state level data
 
 

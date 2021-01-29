@@ -37,8 +37,6 @@ shared_ptr<demogData> readCSVLineDemog(std::string theLine);
 
 // Functions to read a CSV file - specific to data type - hospital data
 shared_ptr<hospitalData> readCSVLineHopstial(std::string theLine);
-
-//read from a CSV file (for a given data type) return a vector of the data
 std::vector<shared_ptr<hospitalData> > read_csvHospital(std::string filename, typeFlag fileType);
 
 #endif
